@@ -1,6 +1,7 @@
 #importing modules
 from tkinter import *
 from datetime import date
+from tkinter import messagebox
 
 root=Tk()    #creating window
 root.title("AGE-CALCULATOR")   #setting up title
@@ -13,29 +14,32 @@ today=str(date.today())    #getting current date using datetime module
 list_today=today.split("-")  #converting into a list
 #defining a function to calcutate age
 def age(b_date,b_month,b_year):
-    global today
-    global new
-    new.grid_forget()
-    b_date=int(entry_date.get())
-    b_month=int(entry_month.get())
-    b_year=int(entry_year.get())
-    c_date=int(list_today[2])
-    c_month=int(list_today[1])
-    c_year=int(list_today[0])
-    month =[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    if(b_date>c_date):
-        c_month=c_month-1
-        c_date=c_date+month[b_month-1]
-    if (b_month>c_month):
-        c_year=c_year-1
-        c_month=c_month+12
-    resultd=str(c_date-b_date)
-    resultm=str(c_month-b_month)
-    resulty=str(c_year-b_year)
-    new=Label(root,text="YOUR AGE \n"+resulty+" YEARS "+resultm+" MONTHS "+\
-              resultd+" DAYS ",fg="#990099",bg="#D5C6FF",borderwidth=6)
-    new.config(font=("Arial Rounded MT Bold",15))
-    new.grid(row=5,column=0,columnspan=3)
+    if entry_date.get()=="" or entry_month.get() =="" or entry_year.get()=="":
+                messagebox.showerror("Error!","All Fields Required")
+    else:
+        global today
+        global new
+        new.grid_forget()
+        b_date=int(entry_date.get())
+        b_month=int(entry_month.get())
+        b_year=int(entry_year.get())
+        c_date=int(list_today[2])
+        c_month=int(list_today[1])
+        c_year=int(list_today[0])
+        month =[31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
+        if(b_date>c_date):
+            c_month=c_month-1
+            c_date=c_date+month[b_month-1]
+        if (b_month>c_month):
+            c_year=c_year-1
+            c_month=c_month+12
+        resultd=str(c_date-b_date)
+        resultm=str(c_month-b_month)
+        resulty=str(c_year-b_year)
+        new=Label(root,text="YOUR AGE \n"+resulty+" YEARS "+resultm+" MONTHS "+\
+                  resultd+" DAYS ",fg="#990099",bg="#D5C6FF",borderwidth=6)
+        new.config(font=("Arial Rounded MT Bold",15))
+        new.grid(row=5,column=0,columnspan=3)
 
 #defining a function to clear the previous entries
 def clean(entry_date,entry_month,entry_year):
